@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+}
+
+group 'template'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url "https://dl.bintray.com/kotlin/kotlin-dev" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    implementation 'com.github.kotlin-graphics.imgui:bgfx:v1.77'
+    implementation 'com.github.kotlin-graphics.imgui:core:v1.77'
+    implementation 'com.github.kotlin-graphics.imgui:gl:v1.77'
+    implementation 'com.github.kotlin-graphics.imgui:glfw:v1.77'
+    implementation 'com.github.kotlin-graphics.imgui:imgui:v1.77'
+    implementation 'com.github.kotlin-graphics.imgui:openjfx:v1.77'
+    implementation 'com.github.kotlin-graphics.imgui:vk:v1.77'
+
+    def version = "3.2.3"
+    def os = "windows"
+    ["lwjgl", "lwjgl-glfw", "lwjgl-opengl", "lwjgl-jemalloc", "lwjgl-stb"].each {
+        implementation "org.lwjgl:$it:$version"
+        implementation "org.lwjgl:$it:$version:natives-$os"
+    }
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    def libs1 = 'D:\\D6\\dev\\java3\\libs1'
+    def uno_core_jar = 'uno_core_d5c433de2b43b6df5e68a443a40d37bd14cc72d9.jar'
+    def uno_awt_jar = 'uno_awt_d5c433de2b43b6df5e68a443a40d37bd14cc72d9.jar'
+    def uno_vk_jar = 'uno_vk_d5c433de2b43b6df5e68a443a40d37bd14cc72d9.jar'
+    def gln_jar = 'gln_3e59f9ea92e49cfb563a43d6af560f2950fca403.jar'
+    def glm_jar = 'glm_a4185eec1272b8b61e1b445a15f66d46299c196e.jar'
+    def kool_jar = 'kool_b393e4c225e0acd9f199c6c022109bb12304d1ec.jar'
+
+    implementation fileTree(dir: libs1, include: [uno_core_jar, uno_awt_jar, uno_vk_jar, gln_jar, glm_jar, kool_jar])
+
+    api "com.badlogicgames.gdx:gdx:1.9.11"
+    api "com.badlogicgames.gdx:gdx-platform:1.9.11"
+    api "com.badlogicgames.gdx:gdx-platform:1.9.11:natives-desktop"
+    api "com.badlogicgames.gdx:gdx-backend-lwjgl3:1.9.11"
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
